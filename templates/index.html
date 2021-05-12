@@ -1,0 +1,48 @@
+<html>
+<head>
+	<script>
+		function turnZone(status, zone)
+		{
+    			var xmlHttp = new XMLHttpRequest();
+    			xmlHttp.onreadystatechange = function() {
+				if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        				getLogs()
+				}
+    			}
+    			xmlHttp.open("GET", status + "?zone=" + zone, true); // true for asynchronous 
+    			xmlHttp.send(null);
+		}
+
+		function getLogs() {
+			var xmlHttp = new XMLHttpRequest();
+                        xmlHttp.onreadystatechange = function() {
+                                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+					console.log(xmlHttp.responseText);
+                                	document.getElementById("logarea").value = xmlHttp.responseText;
+				}
+                        }
+                        xmlHttp.open("GET", "logs", true); // true for asynchronous
+                        xmlHttp.send(null);
+		}
+
+		getLogs()
+	</script>
+</head>
+<body>
+	<h1>Rega</h1>
+
+	<h2>Relvado grande traseiras</h2>
+	<button onClick="turnZone('on', 2)">Ligar</button>
+	<button onClick="turnZone('off', 2)">Desligar</button>
+
+	<h2>Relvado grande frente</h2>
+	<button onClick="turnZone('on', 4)">Ligar</button>
+	<button onClick="turnZone'off', 4)">Desligar</button>
+
+	<h2>Relvado pequeno</h2>
+	<button onClick="turnZone('on', 3)">Ligar</button>
+	<button onClick="turnZone('off', 3)">Desligar</button>
+
+	<textarea id="logarea" rows="10" cols="256" style="margin-top: 60px"/>
+</body>
+</html>
